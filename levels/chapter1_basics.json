@@ -1,0 +1,131 @@
+{
+  "levels": [
+    {
+      "id": "1-1",
+      "chapter": 1,
+      "title": "The Dark Room",
+      "narrative": "You boot up the ancient server. The screen flickers to life with a blinking cursor. You find yourself in an unknown location on this forgotten machine. Before you can explore, you need to figure out where you are.",
+      "riddle": "Where am I? Lost in the machine's maze,\nA single command will clear the haze.\nIt prints your path, your working ground —\nType it now, and you'll be found.",
+      "commands_taught": ["pwd"],
+      "sandbox": {
+        "files": {
+          "welcome.txt": "Welcome to the Lost Server. Your journey begins here."
+        },
+        "dirs": ["archives", "logs"]
+      },
+      "goals": [
+        {"type": "output_contains", "value": "/"}
+      ],
+      "hints": [
+        "You need to find out your current location in the filesystem.",
+        "The command stands for 'print working directory'.",
+        "Try: pwd"
+      ],
+      "points": 10,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "1-2",
+      "chapter": 1,
+      "title": "Looking Around",
+      "narrative": "Good, you know where you are now. But what surrounds you? The server's directories hold many secrets. Time to look around and see what files and folders are here.",
+      "riddle": "Eyes wide open, take a look,\nWhat's around you in this nook?\nTwo small letters, that's the key —\nList the contents for all to see.",
+      "commands_taught": ["ls"],
+      "sandbox": {
+        "files": {
+          "server_log.txt": "Last login: January 15, 2003 — user: phantom_admin",
+          "readme.txt": "If you're reading this, you've found the Lost Server. Good luck."
+        },
+        "dirs": ["backups", "config", "data"]
+      },
+      "goals": [
+        {"type": "output_contains", "value": "readme.txt"}
+      ],
+      "hints": [
+        "You need to see what files and folders exist here.",
+        "The command is just two letters — it 'lists' things.",
+        "Try: ls"
+      ],
+      "points": 10,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "1-3",
+      "chapter": 1,
+      "title": "The Hidden Chamber",
+      "narrative": "The server seems straightforward at first glance. But in the world of Unix, not everything is as it appears. Some files hide in plain sight, their names beginning with a dot. The phantom_admin surely left hidden messages...",
+      "riddle": "I am here but unseen, a dot before my name.\nThe normal listing won't reveal my hidden game.\nAdd a flag to show me, small as can be —\nDiscover what's concealed, and set the secret free.",
+      "commands_taught": ["ls -a"],
+      "sandbox": {
+        "files": {
+          "notes.txt": "Nothing important here... or is there?",
+          "todo.txt": "1. Hide the secrets\n2. Lock the vault\n3. Disappear",
+          ".hidden_message": "PASSWORD FRAGMENT #1: TERM",
+          ".secret_config": "phantom_admin was here. Follow the trail."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": ".hidden_message"}
+      ],
+      "hints": [
+        "Some files start with a dot (.) and are hidden from normal listing.",
+        "The ls command has a flag that shows ALL files, including hidden ones.",
+        "Try: ls -a"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "1-4",
+      "chapter": 1,
+      "title": "Going Deeper",
+      "narrative": "You've found a hidden message! It mentions something about a vault deep inside the server. You notice a directory called 'vault' — perhaps the next clue is inside. Time to learn how to move between directories.",
+      "riddle": "A door stands before you, a folder in disguise.\nStep through it now — change directory, be wise.\nInside the vault, a treasure file awaits,\nRead its name to unlock the gates.",
+      "commands_taught": ["cd", "ls"],
+      "sandbox": {
+        "files": {
+          "map.txt": "The vault is nearby. Enter it to find the next clue.",
+          "vault/treasure.txt": "PASSWORD FRAGMENT #2: INAL",
+          "vault/decoy.txt": "This is not the file you're looking for."
+        },
+        "dirs": ["vault", "empty_room"]
+      },
+      "goals": [
+        {"type": "output_contains", "value": "treasure.txt"}
+      ],
+      "hints": [
+        "You need to enter the 'vault' directory to see what's inside.",
+        "Use 'cd' followed by the directory name to change into it, then list files.",
+        "Try: cd vault && ls"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "1-5",
+      "chapter": 1,
+      "title": "The Way Back",
+      "narrative": "Nice work! But you've gone deep into the vault. Now you need to go back up to continue exploring. Every good explorer knows how to retrace their steps.",
+      "riddle": "You've gone too deep, now climb back out,\nTwo dots will help, without a doubt.\nReturn to where you started from,\nAnd list the files — your journey's not done.",
+      "commands_taught": ["cd ..", "cd ~"],
+      "sandbox": {
+        "files": {
+          "home_marker.txt": "You made it back! Well done, explorer.",
+          "deep/cave/bottom/treasure.txt": "You found the bottom!"
+        },
+        "dirs": ["deep/cave/bottom"]
+      },
+      "goals": [
+        {"type": "output_contains", "value": "home_marker.txt"}
+      ],
+      "hints": [
+        "You need to go UP in the directory tree, back to where you started.",
+        "'cd ..' moves you one directory up. 'cd ~' takes you home.",
+        "If you're deep inside, try: cd ~ then ls"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    }
+  ]
+}

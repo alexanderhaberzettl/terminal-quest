@@ -1,0 +1,111 @@
+{
+  "levels": [
+    {
+      "id": "4-1",
+      "chapter": 4,
+      "title": "Reorganization",
+      "narrative": "The server's filing system is a disaster. A critical report ended up in the wrong directory. You need to move it to where it belongs.",
+      "riddle": "A file is lost, not where it should be,\n'report.txt' belongs in the 'reports' directory.\nMove it there, restore the order,\nSlide the file across the border.",
+      "commands_taught": ["mv"],
+      "sandbox": {
+        "files": {
+          "report.txt": "Quarterly Report Q4 2003: All systems nominal."
+        },
+        "dirs": ["reports", "trash"]
+      },
+      "goals": [
+        {"type": "file_moved", "from": "report.txt", "to": "reports/report.txt"}
+      ],
+      "hints": [
+        "You need to move a file from one location to another.",
+        "The 'mv' command moves (or renames) files: mv source destination",
+        "Try: mv report.txt reports/"
+      ],
+      "points": 10,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "4-2",
+      "chapter": 4,
+      "title": "The Rename",
+      "narrative": "The security system requires a key file to have a very specific name. The file exists, but its name is wrong. You need to rename it without changing its content.",
+      "riddle": "A file called 'old_key.dat' must change its face,\nRename it to 'master_key.dat' to take its place.\nSame command as moving, just a different game —\nWhen source and destination share a folder's frame.",
+      "commands_taught": ["mv (rename)"],
+      "sandbox": {
+        "files": {
+          "old_key.dat": "MASTER_KEY_CONTENT_X9F2A",
+          "readme.txt": "Rename old_key.dat to master_key.dat to activate security."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "file_moved", "from": "old_key.dat", "to": "master_key.dat"}
+      ],
+      "hints": [
+        "Renaming a file is the same as 'moving' it to a new name in the same directory.",
+        "The 'mv' command works for renaming too: mv oldname newname",
+        "Try: mv old_key.dat master_key.dat"
+      ],
+      "points": 10,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "4-3",
+      "chapter": 4,
+      "title": "Backup Protocol",
+      "narrative": "Before modifying any critical file, a good sysadmin always makes a backup first. Copy the critical database file before anything happens to it.",
+      "riddle": "The database is precious, don't let it be lost,\nMake a copy now, whatever the cost.\nDuplicate 'database.db' to 'database.db.bak',\nA backup ensures you can always go back.",
+      "commands_taught": ["cp"],
+      "sandbox": {
+        "files": {
+          "database.db": "CRITICAL DATA: user_records, transaction_logs, system_config"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "file_exists", "path": "database.db"},
+        {"type": "file_exists", "path": "database.db.bak"},
+        {"type": "file_contains", "path": "database.db.bak", "value": "CRITICAL DATA"}
+      ],
+      "hints": [
+        "You need to duplicate a file — the original must stay intact.",
+        "The 'cp' command copies files: cp source destination",
+        "Try: cp database.db database.db.bak"
+      ],
+      "points": 15,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "4-4",
+      "chapter": 4,
+      "title": "Mass Migration",
+      "narrative": "The log files are scattered across the main directory. All files ending in '.log' need to be moved into the 'archive' folder. There are too many to move one by one...",
+      "riddle": "Logs are everywhere, cluttering the view,\nMove them all at once — a wildcard will do.\nEvery '.log' file to 'archive' must go,\nUse a star to catch them in a single flow.",
+      "commands_taught": ["mv with wildcards"],
+      "sandbox": {
+        "files": {
+          "access.log": "access log data",
+          "error.log": "error log data",
+          "system.log": "system log data",
+          "debug.log": "debug log data",
+          "keep_this.txt": "This is not a log file — don't move me!"
+        },
+        "dirs": ["archive"]
+      },
+      "goals": [
+        {"type": "file_exists", "path": "archive/access.log"},
+        {"type": "file_exists", "path": "archive/error.log"},
+        {"type": "file_exists", "path": "archive/system.log"},
+        {"type": "file_exists", "path": "archive/debug.log"},
+        {"type": "file_exists", "path": "keep_this.txt"}
+      ],
+      "hints": [
+        "You need to move multiple files that share a common pattern.",
+        "The '*' wildcard matches any characters: *.log matches all .log files.",
+        "Try: mv *.log archive/"
+      ],
+      "points": 20,
+      "par_time_seconds": 90
+    }
+  ]
+}

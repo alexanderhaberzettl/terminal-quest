@@ -1,0 +1,113 @@
+{
+  "levels": [
+    {
+      "id": "5-1",
+      "chapter": 5,
+      "title": "Needle in a Haystack",
+      "narrative": "The phantom_admin's diary has hundreds of entries. Somewhere in it, they mention a 'password'. You need to search through the file without reading every single line.",
+      "riddle": "A massive diary full of thoughts and dreams,\nBut hidden inside, a password gleams.\nSearch through the text with a powerful tool,\nFind the word 'SECRET' — don't be a fool.",
+      "commands_taught": ["grep"],
+      "sandbox": {
+        "files": {
+          "diary.txt": "Day 1: Started working on the server.\nDay 2: Installed new security patches.\nDay 3: Meeting with the network team.\nDay 4: Debugging the authentication module.\nDay 5: SECRET_CODE=PHANTOM42 — don't forget this!\nDay 6: Routine maintenance.\nDay 7: Backup verification complete.\nDay 8: Updated firewall rules.\nDay 9: Performance tuning finished.\nDay 10: Documentation day."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": "SECRET_CODE=PHANTOM42"}
+      ],
+      "hints": [
+        "You need to search for a specific word inside a file.",
+        "The 'grep' command searches for patterns in files: grep PATTERN FILE",
+        "Try: grep SECRET diary.txt"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "5-2",
+      "chapter": 5,
+      "title": "Recursive Search",
+      "narrative": "The password fragments are scattered across multiple files in multiple directories. You need to search through ALL of them at once to find where 'FRAGMENT' appears.",
+      "riddle": "Files within files, folders within folders deep,\nThe word 'FRAGMENT' hides where secrets sleep.\nSearch through all directories, leave no stone unturned,\nA recursive flag is what must be learned.",
+      "commands_taught": ["grep -r"],
+      "sandbox": {
+        "files": {
+          "surface.txt": "Nothing important here on the surface.",
+          "level1/clue.txt": "Getting warmer...",
+          "level1/level2/notes.txt": "Almost there...",
+          "level1/level2/level3/secret.txt": "PASSWORD FRAGMENT #5: MAS",
+          "decoy/fake.txt": "This is a dead end.",
+          "decoy/another_fake.txt": "Still nothing here."
+        },
+        "dirs": ["level1/level2/level3", "decoy"]
+      },
+      "goals": [
+        {"type": "output_contains", "value": "FRAGMENT #5"}
+      ],
+      "hints": [
+        "You need to search for text across ALL files in ALL subdirectories.",
+        "grep has a recursive flag that searches through all files in subdirectories.",
+        "Try: grep -r FRAGMENT ."
+      ],
+      "points": 20,
+      "par_time_seconds": 120
+    },
+    {
+      "id": "5-3",
+      "chapter": 5,
+      "title": "The Lost File",
+      "narrative": "Somewhere deep in the server's directory tree, there's a file called 'golden_key.txt'. You don't know where it is, but you know its name. Time to find it.",
+      "riddle": "A golden key is lost somewhere below,\nDeep in the tree where few dare to go.\nYou know its name but not its place —\nUse 'find' to locate it in the space.",
+      "commands_taught": ["find"],
+      "sandbox": {
+        "files": {
+          "readme.txt": "The golden_key.txt is hidden somewhere in the directories below.",
+          "rooms/north/storage/junk.txt": "Just junk",
+          "rooms/south/closet/golden_key.txt": "PASSWORD FRAGMENT #6: TER",
+          "rooms/east/lab/experiment.txt": "Failed experiment #42",
+          "rooms/west/office/memo.txt": "Remember to find the key"
+        },
+        "dirs": ["rooms/north/storage", "rooms/south/closet", "rooms/east/lab", "rooms/west/office"]
+      },
+      "goals": [
+        {"type": "output_contains", "value": "golden_key.txt"}
+      ],
+      "hints": [
+        "You need to find a file by name, but you don't know which directory it's in.",
+        "The 'find' command searches for files: find . -name 'filename'",
+        "Try: find . -name golden_key.txt"
+      ],
+      "points": 20,
+      "par_time_seconds": 120
+    },
+    {
+      "id": "5-4",
+      "chapter": 5,
+      "title": "By Their Nature",
+      "narrative": "The server has a mix of files and directories. You need to find all directories that contain the word 'secret' in their name. Only directories — not files!",
+      "riddle": "Many files and folders share this space,\nBut only folders of a 'secret' name embrace.\nFind the directories, ignore the files,\nUse type and name to search through the aisles.",
+      "commands_taught": ["find -type -name"],
+      "sandbox": {
+        "files": {
+          "secret_notes.txt": "This is a FILE, not a directory!",
+          "data/secret_vault/key.txt": "You found the secret vault!",
+          "data/public/info.txt": "Public information here",
+          "config/secret_config/settings.txt": "Secret settings stored here"
+        },
+        "dirs": ["data/secret_vault", "data/public", "config/secret_config", "config/normal"]
+      },
+      "goals": [
+        {"type": "output_contains", "value": "secret_vault"},
+        {"type": "output_contains", "value": "secret_config"}
+      ],
+      "hints": [
+        "You need to find only DIRECTORIES (not files) with 'secret' in the name.",
+        "The find command can filter by type: -type d for directories, -type f for files.",
+        "Try: find . -type d -name '*secret*'"
+      ],
+      "points": 20,
+      "par_time_seconds": 120
+    }
+  ]
+}

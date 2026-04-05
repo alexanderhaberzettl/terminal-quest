@@ -1,0 +1,134 @@
+{
+  "levels": [
+    {
+      "id": "6-1",
+      "chapter": 6,
+      "title": "Chaining Commands",
+      "narrative": "The server has a massive user list. You need to find which users are admins by reading the file and searching the output. Two commands, connected by a pipe.",
+      "riddle": "A list of users, long and wide,\nBut only 'admin' ones you need to find inside.\nChain two commands with a pipe so grand,\nRead the file, then search — hand in hand.",
+      "commands_taught": ["|", "cat | grep"],
+      "sandbox": {
+        "files": {
+          "users.txt": "user:john:viewer\nuser:sarah:editor\nuser:phantom:admin\nuser:mike:viewer\nuser:lisa:editor\nuser:root:admin\nuser:guest:viewer\nuser:alex:editor\nuser:system:admin"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": "phantom:admin"},
+        {"type": "output_contains", "value": "root:admin"}
+      ],
+      "hints": [
+        "You need to read a file AND search its contents in one command.",
+        "The '|' (pipe) sends the output of one command as input to another.",
+        "Try: cat users.txt | grep admin"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "6-2",
+      "chapter": 6,
+      "title": "Counting Words",
+      "narrative": "The server's error log might be corrupted. You need to count how many lines it has to verify its integrity. The expected count is displayed, and you must output the actual count.",
+      "riddle": "How many lines does the error log hold?\nCount them up — let the number be told.\nA command exists that counts with ease,\nLines, words, or bytes — take your pick, if you please.",
+      "commands_taught": ["wc"],
+      "sandbox": {
+        "files": {
+          "error.log": "ERROR: Disk read failure at sector 42\nERROR: Memory allocation failed\nERROR: Network timeout on port 8080\nERROR: Authentication failure for user 'ghost'\nERROR: File not found: /secret/data.enc\nERROR: Permission denied: /root/vault\nERROR: Connection refused from 192.168.1.42\nERROR: Buffer overflow detected\nERROR: Segmentation fault in module X\nERROR: Stack trace dumped to core.log",
+          "expected.txt": "The error log should have exactly 10 lines."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": "10"}
+      ],
+      "hints": [
+        "You need to count the number of lines in a file.",
+        "The 'wc' command counts lines (-l), words (-w), or characters (-c).",
+        "Try: wc -l error.log"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "6-3",
+      "chapter": 6,
+      "title": "Order from Chaos",
+      "narrative": "The access log shows IP addresses that connected to the server. Some appear multiple times. Find the duplicate entries by sorting the list and filtering unique values.",
+      "riddle": "IPs connect, some more than once,\nSort them out — don't be a dunce.\nPipe through sort, then find what's shared,\nDuplicates revealed, none will be spared.",
+      "commands_taught": ["sort", "uniq"],
+      "sandbox": {
+        "files": {
+          "access_ips.txt": "192.168.1.1\n10.0.0.42\n192.168.1.1\n172.16.0.5\n10.0.0.42\n192.168.1.100\n10.0.0.42\n172.16.0.5\n192.168.1.1\n192.168.1.100"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": "192.168.1.1"},
+        {"type": "output_contains", "value": "10.0.0.42"}
+      ],
+      "hints": [
+        "You need to find which IPs appear more than once. Sort first, then find duplicates.",
+        "'sort' orders lines, 'uniq -d' shows only duplicates (requires sorted input).",
+        "Try: sort access_ips.txt | uniq -d"
+      ],
+      "points": 20,
+      "par_time_seconds": 120
+    },
+    {
+      "id": "6-4",
+      "chapter": 6,
+      "title": "The Filtered Log",
+      "narrative": "The server's main log contains thousands of entries of different types: INFO, WARN, ERROR. You need to find out how many ERROR entries there are and which are most common. Chain multiple commands together!",
+      "riddle": "Errors hide in a sea of log lines,\nFilter, sort, and count — read between the signs.\nHow many of each error type appear?\nChain your commands, make the answer clear.",
+      "commands_taught": ["grep | sort | uniq -c"],
+      "sandbox": {
+        "files": {
+          "main.log": "INFO: System started\nERROR: disk_failure\nWARN: Low memory\nERROR: network_timeout\nINFO: User login\nERROR: disk_failure\nWARN: High CPU usage\nERROR: auth_failure\nINFO: Backup complete\nERROR: network_timeout\nWARN: Low disk space\nERROR: disk_failure\nINFO: System check OK\nERROR: network_timeout\nERROR: auth_failure\nINFO: Service restarted\nERROR: disk_failure\nWARN: Memory pressure\nERROR: network_timeout\nERROR: auth_failure"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": "disk_failure"},
+        {"type": "output_contains", "value": "network_timeout"},
+        {"type": "output_contains", "value": "auth_failure"}
+      ],
+      "hints": [
+        "First filter only ERROR lines, then sort them, then count unique occurrences.",
+        "Chain: grep to filter, sort to order, uniq -c to count.",
+        "Try: grep ERROR main.log | sort | uniq -c"
+      ],
+      "points": 25,
+      "par_time_seconds": 120
+    },
+    {
+      "id": "6-5",
+      "chapter": 6,
+      "title": "Redirect and Conquer",
+      "narrative": "The phantom_admin left a final test. Extract all lines containing 'SECRET' from multiple files and save the results to a file called 'collected_secrets.txt'. The server will verify the output file.",
+      "riddle": "Secrets scattered across the land,\nGather them all with a single command.\nSearch through everything, collect what you find,\nRedirect the output — leave nothing behind.",
+      "commands_taught": ["> (redirect)"],
+      "sandbox": {
+        "files": {
+          "file1.txt": "Normal data here\nSECRET: alpha_protocol\nMore normal data",
+          "file2.txt": "Just regular stuff\nNothing to see here",
+          "file3.txt": "SECRET: omega_protocol\nRegular information\nSECRET: delta_protocol"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "file_exists", "path": "collected_secrets.txt"},
+        {"type": "file_contains", "path": "collected_secrets.txt", "value": "alpha_protocol"},
+        {"type": "file_contains", "path": "collected_secrets.txt", "value": "omega_protocol"},
+        {"type": "file_contains", "path": "collected_secrets.txt", "value": "delta_protocol"}
+      ],
+      "hints": [
+        "Search for 'SECRET' across all files and save the results to a new file.",
+        "Use grep to search, then '>' to redirect output into a file.",
+        "Try: grep SECRET *.txt > collected_secrets.txt"
+      ],
+      "points": 25,
+      "par_time_seconds": 120
+    }
+  ]
+}

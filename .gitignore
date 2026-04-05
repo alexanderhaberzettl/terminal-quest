@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.terminal_quest_save.json

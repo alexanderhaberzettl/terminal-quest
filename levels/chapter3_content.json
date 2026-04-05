@@ -1,0 +1,103 @@
+{
+  "levels": [
+    {
+      "id": "3-1",
+      "chapter": 3,
+      "title": "The Message",
+      "narrative": "You've cleaned up the server, but there's a locked file containing a message from the phantom_admin. You need to read its contents to get the next password fragment.",
+      "riddle": "A file named 'encrypted_note.txt' holds a key,\nRead its contents for all to see.\nA feline command will show what's inside —\nThe password fragment can no longer hide.",
+      "commands_taught": ["cat"],
+      "sandbox": {
+        "files": {
+          "encrypted_note.txt": "PASSWORD FRAGMENT #3: QUE\nThe phantom_admin whispers: 'You're getting closer...'",
+          "decoy_note.txt": "This is not the note you're looking for."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": "PASSWORD FRAGMENT #3"}
+      ],
+      "hints": [
+        "You need to display the contents of a file in the terminal.",
+        "Think of a small furry animal... the command 'concatenates' files to output.",
+        "Try: cat encrypted_note.txt"
+      ],
+      "points": 10,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "3-2",
+      "chapter": 3,
+      "title": "The Inscription",
+      "narrative": "The server demands a passphrase to unlock the next area. You must write the word 'OPEN_SESAME' into a file called 'passphrase.txt'. The server will check the file's contents.",
+      "riddle": "Write your words into a file so new,\n'passphrase.txt' awaits your verbal glue.\nThe word 'OPEN_SESAME' must be stored inside,\nEcho your voice, let the text reside.",
+      "commands_taught": ["echo", ">"],
+      "sandbox": {
+        "files": {
+          "instructions.txt": "Write 'OPEN_SESAME' to a file called 'passphrase.txt' to proceed."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "file_exists", "path": "passphrase.txt"},
+        {"type": "file_contains", "path": "passphrase.txt", "value": "OPEN_SESAME"}
+      ],
+      "hints": [
+        "You need to create a file with specific text content.",
+        "The 'echo' command prints text. The '>' operator redirects output to a file.",
+        "Try: echo OPEN_SESAME > passphrase.txt"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "3-3",
+      "chapter": 3,
+      "title": "The Long Scroll",
+      "narrative": "You've found the phantom_admin's log file. It's hundreds of lines long! The clue you need is on the very last line. You don't need to read the whole thing...",
+      "riddle": "A scroll so long, it fills the screen with text,\nBut only the last line holds what comes next.\nDon't read it all — just grab the tail,\nThe final words will tell the tale.",
+      "commands_taught": ["tail"],
+      "sandbox": {
+        "files": {
+          "server_log.txt": "Log entry 001: System boot\nLog entry 002: Memory check passed\nLog entry 003: Disk check passed\nLog entry 004: Network initialized\nLog entry 005: Running diagnostics\nLog entry 006: Loading modules\nLog entry 007: User database loaded\nLog entry 008: Security scan started\nLog entry 009: Firewall rules applied\nLog entry 010: Backup system online\nLog entry 011: Monitoring services started\nLog entry 012: System health: OK\nLog entry 013: Scheduled tasks loaded\nLog entry 014: Mail server initialized\nLog entry 015: Web server started\nLog entry 016: Database connection pool ready\nLog entry 017: Cache warmed up\nLog entry 018: API gateway online\nLog entry 019: All services running\nLog entry 020: PASSWORD FRAGMENT #4: ST_"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "output_contains", "value": "PASSWORD FRAGMENT #4"}
+      ],
+      "hints": [
+        "You only need the last few lines of a very long file.",
+        "The 'tail' command shows the last lines of a file (opposite of 'head').",
+        "Try: tail server_log.txt"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "3-4",
+      "chapter": 3,
+      "title": "Appending the Log",
+      "narrative": "The server's authentication log 'auth.log' needs your name added to it. But be careful — you must APPEND to the log, not overwrite it! The existing entries must remain intact.",
+      "riddle": "The file 'auth.log' tracks who's been here before,\nAdd your name without erasing the lore.\nOne arrow overwrites, but two will append —\nAdd 'PLAYER_LOGGED_IN' to the very end.",
+      "commands_taught": ["echo", ">>"],
+      "sandbox": {
+        "files": {
+          "auth.log": "phantom_admin logged in: 2003-01-15\nroot logged in: 2003-06-20\nguest logged in: 2003-12-01\n"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "file_contains", "path": "auth.log", "value": "phantom_admin"},
+        {"type": "file_contains", "path": "auth.log", "value": "PLAYER_LOGGED_IN"}
+      ],
+      "hints": [
+        "You need to ADD text to the end of a file without erasing existing content.",
+        "'>' overwrites a file, but '>>' appends to the end.",
+        "Try: echo PLAYER_LOGGED_IN >> auth.log"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    }
+  ]
+}

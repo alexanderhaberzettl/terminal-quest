@@ -1,0 +1,133 @@
+{
+  "levels": [
+    {
+      "id": "2-1",
+      "chapter": 2,
+      "title": "The Blank Slate",
+      "narrative": "The server's security system demands proof that you're a real sysadmin. It wants you to create a specific file as a test. If the file appears, the system will trust you.",
+      "riddle": "The server speaks: 'Prove yourself to me,\nCreate a file called access_key — let it be.\nNo content needed, just the name will do,\nA gentle touch creates something new.'",
+      "commands_taught": ["touch"],
+      "sandbox": {
+        "files": {
+          "instructions.txt": "Create a file called 'access_key' to prove you belong here."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "file_exists", "path": "access_key"}
+      ],
+      "hints": [
+        "You need to create a new, empty file.",
+        "The 'touch' command creates a new file if it doesn't exist.",
+        "Try: touch access_key"
+      ],
+      "points": 10,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "2-2",
+      "chapter": 2,
+      "title": "Building Rooms",
+      "narrative": "Access granted! The server needs you to organize its chaos. Files are scattered everywhere. Start by creating a proper directory structure to sort things out.",
+      "riddle": "The server's files are all a mess,\nBuild a room to fix this stress.\nA directory named 'sorted' is what we need,\nCreate the folder, plant the seed.",
+      "commands_taught": ["mkdir"],
+      "sandbox": {
+        "files": {
+          "file_a.txt": "Document A",
+          "file_b.txt": "Document B",
+          "file_c.txt": "Document C"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "dir_exists", "path": "sorted"}
+      ],
+      "hints": [
+        "You need to create a new directory (folder).",
+        "The 'mkdir' command makes a new directory.",
+        "Try: mkdir sorted"
+      ],
+      "points": 10,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "2-3",
+      "chapter": 2,
+      "title": "Nested Construction",
+      "narrative": "Good, but the server needs a deeper structure. It wants you to create an entire path of directories at once — a vault within a vault within a vault.",
+      "riddle": "Three rooms deep, a path must be laid,\ndata/backup/2003 — the structure displayed.\nCreate them all in a single command's might,\nA special flag lets you build the path outright.",
+      "commands_taught": ["mkdir -p"],
+      "sandbox": {
+        "files": {
+          "blueprint.txt": "Required structure: data/backup/2003"
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "dir_exists", "path": "data/backup/2003"}
+      ],
+      "hints": [
+        "You need to create multiple nested directories at once.",
+        "mkdir alone won't work for nested paths — you need a flag for 'parents'.",
+        "Try: mkdir -p data/backup/2003"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    },
+    {
+      "id": "2-4",
+      "chapter": 2,
+      "title": "Demolition",
+      "narrative": "A corrupted file is causing the server to malfunction! The file is infected with bad data and must be destroyed before it spreads.",
+      "riddle": "A virus lurks in a file called 'malware.dat',\nRemove it quickly — squash it flat!\nDelete the threat with a simple command,\nSave the server from the villain's hand.",
+      "commands_taught": ["rm"],
+      "sandbox": {
+        "files": {
+          "important_data.txt": "KEEP THIS FILE SAFE!",
+          "malware.dat": "CORRUPTED DATA — DESTROY THIS FILE",
+          "system.log": "Alert: malware.dat detected. Remove immediately."
+        },
+        "dirs": []
+      },
+      "goals": [
+        {"type": "file_absent", "path": "malware.dat"},
+        {"type": "file_exists", "path": "important_data.txt"}
+      ],
+      "hints": [
+        "You need to delete a specific file, but be careful not to delete the wrong ones!",
+        "The 'rm' command removes files. Use it with the filename.",
+        "Try: rm malware.dat"
+      ],
+      "points": 15,
+      "par_time_seconds": 60
+    },
+    {
+      "id": "2-5",
+      "chapter": 2,
+      "title": "Clean Sweep",
+      "narrative": "The malware left behind an entire directory of junk data. It's a whole tree of corrupted files that must be purged. A simple rm won't work on directories...",
+      "riddle": "A folder full of digital rot,\n'junk_data' holds a tangled knot.\nRemove the tree, from root to leaf,\nA recursive flag brings sweet relief.",
+      "commands_taught": ["rm -r"],
+      "sandbox": {
+        "files": {
+          "keep_this.txt": "Important! Do not delete!",
+          "junk_data/file1.tmp": "corrupted",
+          "junk_data/file2.tmp": "corrupted",
+          "junk_data/sub/file3.tmp": "corrupted"
+        },
+        "dirs": ["junk_data/sub"]
+      },
+      "goals": [
+        {"type": "file_absent", "path": "junk_data"},
+        {"type": "file_exists", "path": "keep_this.txt"}
+      ],
+      "hints": [
+        "You need to delete an entire directory and everything inside it.",
+        "The rm command needs a recursive flag to remove directories.",
+        "Try: rm -r junk_data"
+      ],
+      "points": 15,
+      "par_time_seconds": 90
+    }
+  ]
+}

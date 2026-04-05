@@ -1,0 +1,41 @@
+{
+  "levels": [
+    {
+      "id": "7-1",
+      "chapter": 7,
+      "title": "The Master's Test",
+      "narrative": "This is it — the final challenge. The phantom_admin's ultimate test combines everything you've learned. Deep within the server's labyrinth lies a fragmented password. You must navigate directories, find hidden files, read their contents, search for clues, and assemble the final answer.\n\nThe server whispers: 'Create a file called final_password.txt in the root directory. Inside, write the combined fragments you've found: TERMINAL_QUEST_MASTER'\n\nBut first, you must prove your mastery. The fragments are scattered and hidden. Find them all.",
+      "riddle": "Navigate the maze, find what's concealed,\nHidden files and nested paths revealed.\nSearch for 'FINAL' across the land,\nThen write the password by your hand.\n\nCreate 'final_password.txt' with the master key:\nTERMINAL_QUEST_MASTER — set the server free!",
+      "commands_taught": ["all previous commands"],
+      "sandbox": {
+        "files": {
+          "README.txt": "Welcome to the final test.\n\nStep 1: Find the hidden file in this directory\nStep 2: Navigate to the 'labyrinth' and find your way through\nStep 3: Search for all files containing 'FINAL'\nStep 4: Create final_password.txt with: TERMINAL_QUEST_MASTER",
+          ".first_clue": "FINAL CLUE 1: Navigate to labyrinth/path_a/path_b",
+          "labyrinth/path_a/path_b/checkpoint.txt": "FINAL CLUE 2: Good! Now search for 'FINAL' in the depths",
+          "labyrinth/path_a/dead_end/nope.txt": "Wrong path! Go back.",
+          "labyrinth/path_c/dead_end_2/still_nope.txt": "Dead end again!",
+          "labyrinth/depths/level1/level2/.hidden_final": "FINAL CLUE 3: The password is TERMINAL_QUEST_MASTER",
+          "labyrinth/depths/level1/decoy.txt": "Not here... keep looking deeper.",
+          "labyrinth/depths/level1/level2/notes.txt": "You're very close now..."
+        },
+        "dirs": [
+          "labyrinth/path_a/path_b",
+          "labyrinth/path_a/dead_end",
+          "labyrinth/path_c/dead_end_2",
+          "labyrinth/depths/level1/level2"
+        ]
+      },
+      "goals": [
+        {"type": "file_exists", "path": "final_password.txt"},
+        {"type": "file_contains", "path": "final_password.txt", "value": "TERMINAL_QUEST_MASTER"}
+      ],
+      "hints": [
+        "Start by checking for hidden files (ls -a), then explore the labyrinth directory.",
+        "Use 'find' or 'grep -r' to search for 'FINAL' across all directories to find the clues.",
+        "Once you know the password, create the file: echo TERMINAL_QUEST_MASTER > final_password.txt"
+      ],
+      "points": 50,
+      "par_time_seconds": 300
+    }
+  ]
+}
